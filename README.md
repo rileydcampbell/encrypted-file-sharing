@@ -5,13 +5,14 @@ Successfully demonstrated fundamental security principles in our design document
 
 Section 1: System Design
 
-User Struct: contains the username, private asymmetric decryption key, private digital signature key, a fileTable UUID, and a fileTableKey. (uuid.new and fileTableKey is randomBytes) 
-uuidAndFileKey Struct: contains a FileLoc UUID and a FileKey (uuid.new and randomBytes) 
-FileTable Struct: contains a mapping from filename to uuidAndFileKey struct
-File Struct: contains a mapping from index to uuidAndFileKey struct
-FileCompartment Struct: contains bytes
-getKeys(masterKey): HMACs master key with “this is HMAC Key” to get HMACKey and HMACs masterKey with “this is SYM Encrypt key” to get symmetric encryption key. Returns both keys. 
-AuthenticatedEncryption(masterKey, msgToEncrypt): calls getKeys(masterKey) uses the symKey to encrypt msg and appends the HMAC(hmacKey, encryptedMsg). Returns this. Authenticated Decryption(masterKey, msgToDecrypt): calls getKeys(masterKey) to get symKey and HMACKey. Checks if HMACEqual(encryptedMsg, HMACofEncryptedMsg) is true, if so it decrypts the msg with SymKey and returns the decrypted msg.
+User Struct: contains the username, private asymmetric decryption key, private digital signature key, a fileTable UUID, and a fileTableKey. (uuid.new and fileTableKey is randomBytes) <br />
+uuidAndFileKey Struct: contains a FileLoc UUID and a FileKey (uuid.new and randomBytes) <br />
+FileTable Struct: contains a mapping from filename to uuidAndFileKey struct <br />
+File Struct: contains a mapping from index to uuidAndFileKey struct <br />
+FileCompartment Struct: contains bytes <br />
+getKeys(masterKey): HMACs master key with “this is HMAC Key” to get HMACKey and HMACs masterKey with “this is SYM Encrypt key” to get symmetric encryption key. Returns both keys. <br />
+AuthenticatedEncryption(masterKey, msgToEncrypt): calls getKeys(masterKey) uses the symKey to encrypt msg and appends the HMAC(hmacKey, encryptedMsg). Returns this. <br /> 
+Authenticated Decryption(masterKey, msgToDecrypt): calls getKeys(masterKey) to get symKey and HMACKey. Checks if HMACEqual(encryptedMsg, HMACofEncryptedMsg) is true, if so it decrypts the msg with SymKey and returns the decrypted msg.
 
 Section 2: Summary of Encryption Scheme
 
